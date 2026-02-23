@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -52,7 +53,7 @@ public class Ventana extends JFrame{
 		contenedor.add(username);
 		
 		JLabel usuario= new JLabel();
-		usuario.setText("Usuario");
+		usuario.setText("Usuario:");
 		usuario.setSize(200,30);
 		//usuario.setOpaque(true);
 		usuario.setLocation(100,130);
@@ -68,7 +69,7 @@ public class Ventana extends JFrame{
 		contenedor.add(password);
 		
 		JLabel contraseña= new JLabel();
-		contraseña.setText("Contraseña");
+		contraseña.setText("Contraseña:");
 		contraseña.setSize(200,30);
 		//usuario.setOpaque(true);
 		contraseña.setLocation(100,220);
@@ -76,10 +77,26 @@ public class Ventana extends JFrame{
 		contraseña.setHorizontalAlignment(JLabel.LEFT);
 		contenedor.add(contraseña);
 		
+		JCheckBox recordar = new JCheckBox();
+		recordar.setText("Recordarme");
+		recordar.setSize(150,30);
+		recordar.setLocation(100,290);
+		recordar.setBackground(new Color(245, 247, 250));
+		recordar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		contenedor.add(recordar);
+		
+		JLabel olvido = new JLabel();
+		olvido.setText("¿Olvidó su contraseña?");
+		olvido.setSize(200,30);
+		olvido.setLocation(250,290);
+		olvido.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		olvido.setForeground(new Color(33,150,243));
+		contenedor.add(olvido);
+		
 		JButton acceder= new JButton();
 		acceder.setText("Acceder");
 		acceder.setSize(180,50);
-		acceder.setLocation(160,330);
+		acceder.setLocation(160,360);
 		acceder.setFont(new Font("Segoe UI",Font.BOLD,22));
 		acceder.setBackground(new Color(33, 150, 243));
 		acceder.setForeground(Color.WHITE);
