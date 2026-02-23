@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Ventana extends JFrame{
@@ -19,14 +20,14 @@ public class Ventana extends JFrame{
 		//this.setLocationRelativeTo(null);//ponerla en el centro
 		this.setMinimumSize(new Dimension(200,200));//da parametros de cuanto puede crecer o minimizar
 		this.setMaximumSize(new Dimension(800,800));
-		this.setTitle("Holis");
+		this.setTitle("Login");
 		this.setBackground(Color.BLACK);
 		this.setLocation(200,200);
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
 		
 		JPanel contenedor = new JPanel();//seria nuestra hoja
 		contenedor.setOpaque(true);
-		contenedor.setBackground(Color.pink);
+		contenedor.setBackground(new Color(245, 247, 250));
 		contenedor.setSize(500,500);
 		contenedor.setLocation(0,0);
 		contenedor.setLayout(null);
@@ -35,25 +36,53 @@ public class Ventana extends JFrame{
 		
 		JLabel title_login = new JLabel();
 		title_login.setText("Bienvenido");
-		title_login.setSize(200,30);
-		title_login.setOpaque(true);
-		title_login.setLocation(150,10);
-		title_login.setBackground(Color.gray);
-		title_login.setFont(new Font("Arial",Font.BOLD,22));//Para darle fuente al texto
+		title_login.setSize(500,50);
+		title_login.setOpaque(false);
+		title_login.setLocation(0,40);
+		//title_login.setBackground(Color.gray);
+		title_login.setFont(new Font("Segoe UI", Font.BOLD, 38));//Para darle fuente al texto
 		title_login.setHorizontalAlignment(JLabel.CENTER);
 		contenedor.add(title_login);
 		
 		JTextField username = new JTextField();
 		username.setSize(300,30);
-		username.setLocation(30,150);
-		username.setFont(new Font("Arial",Font.BOLD,22));
+		username.setLocation(100,160);
+		username.setBackground(Color.WHITE);
+		username.setFont(new Font("Segoe UI",Font.BOLD,22));
 		contenedor.add(username);
+		
+		JLabel usuario= new JLabel();
+		usuario.setText("Usuario");
+		usuario.setSize(200,30);
+		//usuario.setOpaque(true);
+		usuario.setLocation(100,130);
+		usuario.setFont(new Font("Segoe UI", Font.PLAIN, 20));//Para darle fuente al texto
+		usuario.setHorizontalAlignment(JLabel.LEFT);
+		contenedor.add(usuario);
+		
+		JPasswordField password = new JPasswordField();
+		password.setSize(300,30);
+		password.setLocation(100,250);
+		password.setBackground(Color.WHITE);
+		password.setFont(new Font("Segoe UI",Font.BOLD,22));
+		contenedor.add(password);
+		
+		JLabel contraseña= new JLabel();
+		contraseña.setText("Contraseña");
+		contraseña.setSize(200,30);
+		//usuario.setOpaque(true);
+		contraseña.setLocation(100,220);
+		contraseña.setFont(new Font("Segoe UI", Font.PLAIN, 20));//Para darle fuente al texto
+		contraseña.setHorizontalAlignment(JLabel.LEFT);
+		contenedor.add(contraseña);
 		
 		JButton acceder= new JButton();
 		acceder.setText("Acceder");
 		acceder.setSize(180,50);
-		acceder.setLocation(150,350);
-		acceder.setFont(new Font("Arial",Font.BOLD,22));
+		acceder.setLocation(160,330);
+		acceder.setFont(new Font("Segoe UI",Font.BOLD,22));
+		acceder.setBackground(new Color(33, 150, 243));
+		acceder.setForeground(Color.WHITE);
 		contenedor.add(acceder);
 		
 		
