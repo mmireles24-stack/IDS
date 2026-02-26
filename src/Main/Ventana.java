@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -29,8 +31,14 @@ public class Ventana extends JFrame{
 		this.setTitle("Login");
 		this.setBackground(Color.BLACK);
 		this.setLocation(200,200);
+		this.getContentPane().setBackground(Color.decode("#CADBAD"));;
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
 		
+		
+		this.users();//Para mostrar el panel que queremos ver 
+}
+	public void login ()//Asi se encapsulan los paneles.
+	{
 		JPanel contenedor = new JPanel();//seria nuestra hoja
 		contenedor.setOpaque(true);
 		contenedor.setBackground(new Color(245, 247, 250));
@@ -111,111 +119,212 @@ public class Ventana extends JFrame{
 		contenedor.repaint();//refrescar la ventana una vez ejecutada 
 		contenedor.revalidate();
 		
+		
+		
+	}
+	
+	public void registro ()
+	{
 		//REGISTER---
 		
-		JPanel register_container = new JPanel();//seria nuestra hoja
-		register_container.setOpaque(true);
-		register_container.setBackground(new Color(238, 242, 246));
-		register_container.setSize(500,500);
-		register_container.setLocation(650,0);
-		register_container.setLayout(null);
-		this.add(register_container);
-		
-		JLabel registro = new JLabel("Registro");
-		registro.setBounds(0,20,500,50);
-		registro.setFont(new Font("Segoe UI", Font.BOLD, 34));
-		registro.setHorizontalAlignment(JLabel.CENTER);
-		register_container.add(registro);
-		
-		//NOMBRE------
-		JLabel nombre= new JLabel("Nombre de usuario:");
-		nombre.setBounds(100,85,300,25);
-		nombre.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		register_container.add(nombre);
-		
-		JTextField username1 = new JTextField();
-		username1.setBounds(100,110,300,35);
-		username1.setBackground(Color.WHITE);
-		username1.setFont(new Font("Segoe UI",Font.PLAIN,18));
-		register_container.add(username1);
-		
-		//BIOGRAFRÍA-----
-		JLabel bio_tag = new JLabel("Biografía");
-		bio_tag.setBounds(0,160,500,30);
-		bio_tag.setHorizontalAlignment(JLabel.CENTER);
-		bio_tag.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		register_container.add(bio_tag);
-		
-		JTextArea bio = new JTextArea();
-		bio.setBounds(100,190,300,70);
-		bio.setBorder(BorderFactory.createLineBorder(new Color(200,200,200)));
-		register_container.add(bio);
-		
-		//PREFERENCIAS---
-		JLabel preferences = new JLabel("Preferencias");
-		preferences.setBounds(0,270,500,30);
-		preferences.setHorizontalAlignment(JLabel.CENTER);
-		preferences.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		register_container.add(preferences);
-		
-		JCheckBox sweet_option = new JCheckBox("Dulce");
-		sweet_option.setBounds(110,300,90,25);
-		sweet_option.setOpaque(false);
-		register_container.add(sweet_option);
-		
-		JCheckBox salty_option = new JCheckBox("Salado");
-		salty_option.setBounds(210,300,90,25);
-		salty_option.setOpaque(false);
-		register_container.add(salty_option);
-		
-		JCheckBox healthy_option = new JCheckBox("Saludable");
-		healthy_option.setBounds(310,300,110,25);
-		healthy_option.setOpaque(false);
-		//healthy_option.setBorderPainted(true);
-		//healthy_option.setBorder(BorderFactory.createLineBorder(Color.white));
-		register_container.add(healthy_option);
-		
-		//TÉRMINOS----
-		JLabel terms_text = new JLabel("Términos");
-		terms_text .setBounds(0,330,500,30);
-		terms_text .setHorizontalAlignment(JLabel.CENTER);
-		terms_text .setFont(new Font("Segoe UI", Font.BOLD, 22));
-		register_container.add(terms_text );
-		
-		
-		JRadioButton accept_terms = new JRadioButton("Acepto terminos");
-		accept_terms.setBounds(110,360,140,25);
-		accept_terms.setOpaque(false);
-		register_container.add(accept_terms);
-		
-		JRadioButton reject_terms = new JRadioButton("Rechazo terminos");
-		reject_terms.setBounds(260,360,160,25);
-		reject_terms.setOpaque(false);
-		register_container.add(reject_terms);
-		
-		ButtonGroup terms = new ButtonGroup();
-		terms.add(reject_terms);
-		terms.add(accept_terms);
-		
-		String [] colonias = {"Camino Real", "La fuente", "Villas del encanto"};
-		
-		JComboBox list =new JComboBox(colonias);
-		list.setBounds(100,395,300,30);
-		register_container.add(list);
-		
-		JButton create_account = new JButton("Crear cuenta");
-		create_account.setBounds(150,435,200,40);
-		create_account.setFont(new Font("Segoe UI",Font.BOLD,22));
-		create_account.setBackground(new Color(25, 118, 210));
-		create_account.setForeground(Color.WHITE);
-		register_container.add(create_account);
-		
-		
-		
-		
+				JPanel register_container = new JPanel();//seria nuestra hoja
+				register_container.setOpaque(true);
+				register_container.setBackground(new Color(238, 242, 246));
+				register_container.setSize(500,500);
+				register_container.setLocation(650,0);
+				register_container.setLayout(null);
+				this.add(register_container);
+				
+				JLabel registro = new JLabel("Registro");
+				registro.setBounds(0,20,500,50);
+				registro.setFont(new Font("Segoe UI", Font.BOLD, 34));
+				registro.setHorizontalAlignment(JLabel.CENTER);
+				register_container.add(registro);
+				
+				//NOMBRE------
+				JLabel nombre= new JLabel("Nombre de usuario:");
+				nombre.setBounds(100,85,300,25);
+				nombre.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+				register_container.add(nombre);
+				
+				JTextField username1 = new JTextField();
+				username1.setBounds(100,110,300,35);
+				username1.setBackground(Color.WHITE);
+				username1.setFont(new Font("Segoe UI",Font.PLAIN,18));
+				register_container.add(username1);
+				
+				//BIOGRAFRÍA-----
+				JLabel bio_tag = new JLabel("Biografía");
+				bio_tag.setBounds(0,160,500,30);
+				bio_tag.setHorizontalAlignment(JLabel.CENTER);
+				bio_tag.setFont(new Font("Segoe UI", Font.BOLD, 20));
+				register_container.add(bio_tag);
+				
+				JTextArea bio = new JTextArea();
+				bio.setBounds(100,190,300,70);
+				bio.setBorder(BorderFactory.createLineBorder(new Color(200,200,200)));
+				register_container.add(bio);
+				
+				//PREFERENCIAS---
+				JLabel preferences = new JLabel("Preferencias");
+				preferences.setBounds(0,270,500,30);
+				preferences.setHorizontalAlignment(JLabel.CENTER);
+				preferences.setFont(new Font("Segoe UI", Font.BOLD, 20));
+				register_container.add(preferences);
+				
+				JCheckBox sweet_option = new JCheckBox("Dulce");
+				sweet_option.setBounds(110,300,90,25);
+				sweet_option.setOpaque(false);
+				register_container.add(sweet_option);
+				
+				JCheckBox salty_option = new JCheckBox("Salado");
+				salty_option.setBounds(210,300,90,25);
+				salty_option.setOpaque(false);
+				register_container.add(salty_option);
+				
+				JCheckBox healthy_option = new JCheckBox("Saludable");
+				healthy_option.setBounds(310,300,110,25);
+				healthy_option.setOpaque(false);
+				//healthy_option.setBorderPainted(true);
+				//healthy_option.setBorder(BorderFactory.createLineBorder(Color.white));
+				register_container.add(healthy_option);
+				
+				//TÉRMINOS----
+				JLabel terms_text = new JLabel("Términos");
+				terms_text .setBounds(0,330,500,30);
+				terms_text .setHorizontalAlignment(JLabel.CENTER);
+				terms_text .setFont(new Font("Segoe UI", Font.BOLD, 22));
+				register_container.add(terms_text );
+				
+				
+				JRadioButton accept_terms = new JRadioButton("Acepto terminos");
+				accept_terms.setBounds(110,360,140,25);
+				accept_terms.setOpaque(false);
+				register_container.add(accept_terms);
+				
+				JRadioButton reject_terms = new JRadioButton("Rechazo terminos");
+				reject_terms.setBounds(260,360,160,25);
+				reject_terms.setOpaque(false);
+				register_container.add(reject_terms);
+				
+				ButtonGroup terms = new ButtonGroup();
+				terms.add(reject_terms);
+				terms.add(accept_terms);
+				
+				String [] colonias = {"Camino Real", "La fuente", "Villas del encanto"};
+				
+				JComboBox list =new JComboBox(colonias);
+				list.setBounds(100,395,300,30);
+				register_container.add(list);
+				
+				JButton create_account = new JButton("Crear cuenta");
+				create_account.setBounds(150,435,200,40);
+				create_account.setFont(new Font("Segoe UI",Font.BOLD,22));
+				create_account.setBackground(new Color(25, 118, 210));
+				create_account.setForeground(Color.WHITE);
+				register_container.add(create_account);
+				
+				register_container.repaint();
 		
 		
-		register_container.repaint();
+	}
+
+	public void users()
+	{
+		
+		JPanel users = new JPanel();
+		users.setSize(950,500);
+		users.setLocation(100,30);
+		users.setBackground(Color.decode("#E3E3DC"));
+		users.setLayout(null);
+		this.add(users);
+		
+		JLabel users_title = new JLabel("Usuarios");
+		users_title.setBounds(400,30,150,50);
+		users_title.setHorizontalAlignment(JLabel.CENTER);
+		users_title.setOpaque(true);
+		users_title.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		users_title.setBackground((Color.decode("#EDD15F")));
+		users.add(users_title);
+		
+		JButton export = new JButton ("Exportar");
+		export.setBounds(30,120,100,40);
+		users.add(export);
+		
+		JButton add = new JButton("Añadir");
+		add.setBounds(140,120,100,40);
+		users.add(add);
+		
+		
+		
+		Object [] table_head = {"NO. DE CONTROL","NOMBRE", "APELLIDOS", "SEMESTRE","PROMEDIO","ACCION"};
+
+		Object [][] table_content = {
+		        {"123","Ana","Lopez","3","9.5","Editar"},
+		        {"456","Luis","Martinez","2","8.7","Editar"},
+		        {"789","Sofia","Perez","5","9.1","Editar"},
+		        {"321","Carlos","Gomez","1","8.9","Editar"},
+		        {"654","Mariana","Torres","4","9.2","Editar"},
+		        {"987","Diego","Ramirez","6","8.5","Editar"},
+		        {"741","Valeria","Hernandez","2","9.8","Editar"},
+		        {"852","Jorge","Castro","3","7.9","Editar"},
+		        {"963","Fernanda","Vargas","5","9.0","Editar"},
+		        {"159","Ricardo","Ortega","1","8.3","Editar"},
+		        {"753","Camila","Rios","4","9.6","Editar"},
+		        {"258","Andres","Mendoza","2","8.1","Editar"},
+		        {"369","Paula","Silva","6","9.4","Editar"},
+		        {"147","Daniel","Flores","3","7.8","Editar"},
+
+		        {"2589","Natalia","Cruz","5","9.7","Editar"},
+		        {"3698","Hugo","Reyes","4","8.4","Editar"},
+		        {"1472","Elena","Morales","1","9.3","Editar"},
+		        {"2583","Sergio","Navarro","2","8.0","Editar"},
+		        {"3694","Lucia","Delgado","6","9.1","Editar"},
+		        {"7412","Miguel","Santos","3","7.7","Editar"},
+		        {"8523","Diana","Guerrero","4","9.9","Editar"},
+		        {"9634","Emilio","Paredes","5","8.6","Editar"},
+		        {"1597","Gabriela","Salazar","2","9.2","Editar"},
+		        {"7531","Oscar","Ibarra","1","8.8","Editar"},
+
+		        {"8642","Alejandra","Campos","6","9.5","Editar"},
+		        {"9753","Alberto","Vega","3","7.6","Editar"},
+		        {"1864","Monica","Carrillo","4","8.9","Editar"},
+		        {"2975","Raul","Suarez","2","8.2","Editar"},
+		        {"3086","Patricia","Figueroa","5","9.4","Editar"},
+		        {"4197","Ivan","Contreras","1","7.5","Editar"},
+		        {"5208","Veronica","Escobar","6","9.6","Editar"},
+		        {"6319","Roberto","Luna","3","8.7","Editar"},
+		        {"7420","Adriana","Acosta","4","9.3","Editar"},
+		        {"8531","Francisco","Molina","2","8.4","Editar"},
+
+		        {"9642","Isabel","Valdez","5","9.8","Editar"},
+		        {"1753","Tomas","Rangel","1","7.9","Editar"},
+		        {"2864","Claudia","Peña","6","9.1","Editar"},
+		        {"3975","Javier","Cervantes","3","8.5","Editar"},
+		        {"4086","Lorena","Aguilar","4","9.0","Editar"},
+		        {"5197","Esteban","Mejia","2","7.8","Editar"},
+		        {"6208","Renata","Padilla","5","9.7","Editar"},
+		        {"7319","Guillermo","Fuentes","1","8.3","Editar"},
+		        {"8420","Daniela","Solis","6","9.2","Editar"},
+		        {"9531","Armando","Galvan","3","8.6","Editar"},
+
+		        {"1642","Melissa","Rosales","4","9.4","Editar"},
+		        {"2753","Bruno","Miranda","2","7.7","Editar"},
+		        {"3864","Ariana","Villanueva","5","9.9","Editar"},
+		        {"4975","Cristian","Lozano","1","8.1","Editar"},
+		        {"5086","Sandra","Beltran","6","9.3","Editar"},
+		        {"6197","Kevin","Zamora","3","8.2","Editar"},
+		        {"7208","Lilia","Montoya","4","9.6","Editar"},
+		        {"8319","Marco","Nieto","2","7.9","Editar"},
+		        {"9420","Andrea","Bravo","5","9.5","Editar"},
+		        {"10531","Julio","Cortes","1","8.4","Editar"}
+		};
+
+		JTable users_table = new JTable(table_content, table_head);
+
+		JScrollPane scroll = new JScrollPane(users_table);
+		scroll.setBounds(30,170,800,300);
+		users.add(scroll);
 		
 		
 		
@@ -223,5 +332,6 @@ public class Ventana extends JFrame{
 		
 		
 	}
-
 }
+
+
