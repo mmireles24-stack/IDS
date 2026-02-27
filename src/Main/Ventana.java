@@ -35,7 +35,7 @@ public class Ventana extends JFrame{
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
 		
 		
-		this.users();//Para mostrar el panel que queremos ver 
+		this.login();//Para mostrar el panel que queremos ver 
 }
 	public void login ()//Asi se encapsulan los paneles.
 	{
@@ -134,7 +134,7 @@ public class Ventana extends JFrame{
 				register_container.setLocation(650,0);
 				register_container.setLayout(null);
 				this.add(register_container);
-				
+			
 				JLabel registro = new JLabel("Registro");
 				registro.setBounds(0,20,500,50);
 				registro.setFont(new Font("Segoe UI", Font.BOLD, 34));
