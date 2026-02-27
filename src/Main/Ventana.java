@@ -11,6 +11,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -22,7 +25,6 @@ import javax.swing.JTextField;
 public class Ventana extends JFrame{
 
 	public Ventana() {
-		this.setVisible(true);//para que se vea la ventana
 		this.setSize(1200,600);//para que tenga medidas de cuando se crea
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//al cerrar ventana no se siga ejecutando el codigo
 		//this.setLocationRelativeTo(null);//ponerla en el centro
@@ -34,8 +36,38 @@ public class Ventana extends JFrame{
 		this.getContentPane().setBackground(Color.decode("#CADBAD"));;
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
 		
+		JMenuBar barra = new JMenuBar();
 		
-		this.login();//Para mostrar el panel que queremos ver 
+		JMenu archivo = new JMenu("Archivo");
+		
+		JMenuItem open = new JMenuItem("Abrir");
+		JMenuItem close = new JMenuItem("Cerrar");
+		JMenuItem save = new JMenuItem("Guardar");
+		JMenuItem newFile = new JMenuItem("Nuevo");
+		
+		archivo.add(open);
+		archivo.add(close);
+		archivo.add(save);
+		archivo.add(newFile);
+		barra.add(archivo);
+		
+		JMenu submenu = new JMenu("Otros");
+		archivo.addSeparator();
+		
+		JMenuItem menuItem = new JMenuItem("An item in the submenu");
+		submenu.add(menuItem);
+		
+		menuItem = new JMenuItem("Another Item");
+		submenu.add(menuItem);
+		archivo.add(submenu);
+		
+		
+		this.setJMenuBar(barra);
+		
+		
+		
+		this.users();//Para mostrar el panel que queremos ver 
+		this.setVisible(true);//para que se vea la ventana
 }
 	public void login ()//Asi se encapsulan los paneles.
 	{
@@ -326,6 +358,7 @@ public class Ventana extends JFrame{
 		scroll.setBounds(30,170,800,300);
 		users.add(scroll);
 		
+		users.repaint();
 		
 		
 		
