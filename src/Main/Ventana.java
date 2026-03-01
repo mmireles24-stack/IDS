@@ -3,9 +3,14 @@ package Main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -32,11 +37,29 @@ public class Ventana extends JFrame{
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("Login");
 		this.setBackground(Color.BLACK);
-		this.setLocation(200,200);
-		this.getContentPane().setBackground(Color.decode("#CADBAD"));;
+		this.setContentPane(new JPanel() {
+			
+		    protected void paintComponent(Graphics g) {
+		        super.paintComponent(g);
+		        Graphics2D g2d = (Graphics2D) g;
+
+		        Color azul = new Color(0, 153, 255);
+		        Color turquesa = new Color(0, 255, 255);
+
+		        GradientPaint gp = new GradientPaint(
+		                0, 0, azul,
+		                0, getHeight(), turquesa
+		        );
+
+		        g2d.setPaint(gp);
+		        g2d.fillRect(0, 0, getWidth(), getHeight());
+		    }
+		});
+		//this.getContentPane().setBackground(Color.decode("#0B0B0F"));;
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
+		this.setLocation(200,200);
 		
-		JMenuBar barra = new JMenuBar();
+		/*JMenuBar barra = new JMenuBar();
 		
 		JMenu archivo = new JMenu("Archivo");
 		
@@ -61,21 +84,17 @@ public class Ventana extends JFrame{
 		submenu.add(menuItem);
 		archivo.add(submenu);
 		
+		this.setJMenuBar(barra);*/
 		
-		this.setJMenuBar(barra);
-		
-		
-		
-		this.users();//Para mostrar el panel que queremos ver 
+		this.login();//Para mostrar el panel que queremos ver 
 		this.setVisible(true);//para que se vea la ventana
 }
 	public void login ()//Asi se encapsulan los paneles.
 	{
-		JPanel contenedor = new JPanel();//seria nuestra hoja
-		contenedor.setOpaque(true);
-		contenedor.setBackground(new Color(245, 247, 250));
-		contenedor.setSize(500,500);
-		contenedor.setLocation(0,0);
+		JPanel contenedor = new JPanel();
+		contenedor.setBackground(new Color(18, 22, 38));
+		contenedor.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+		contenedor.setBounds(150, 20, 900, 500);
 		contenedor.setLayout(null);
 		this.add(contenedor);
 		
@@ -88,14 +107,8 @@ public class Ventana extends JFrame{
 		//title_login.setBackground(Color.gray);
 		title_login.setFont(new Font("Segoe UI", Font.BOLD, 38));//Para darle fuente al texto
 		title_login.setHorizontalAlignment(JLabel.CENTER);
+		title_login.setForeground(Color.WHITE); 
 		contenedor.add(title_login);
-		
-		JTextField username = new JTextField();
-		username.setSize(300,30);
-		username.setLocation(100,160);
-		username.setBackground(Color.WHITE);
-		username.setFont(new Font("Segoe UI",Font.BOLD,22));
-		contenedor.add(username);
 		
 		JLabel usuario= new JLabel();
 		usuario.setText("Usuario:");
@@ -104,14 +117,25 @@ public class Ventana extends JFrame{
 		usuario.setLocation(100,130);
 		usuario.setFont(new Font("Segoe UI", Font.PLAIN, 20));//Para darle fuente al texto
 		usuario.setHorizontalAlignment(JLabel.LEFT);
+		usuario.setForeground(new Color(180,190,210));
 		contenedor.add(usuario);
 		
-		JPasswordField password = new JPasswordField();
-		password.setSize(300,30);
-		password.setLocation(100,250);
-		password.setBackground(Color.WHITE);
-		password.setFont(new Font("Segoe UI",Font.BOLD,22));
-		contenedor.add(password);
+		JTextField username = new JTextField();
+		username.setSize(300,30);
+		username.setLocation(100,160);
+		username.setBackground(new Color(30, 35, 55));
+		username.setForeground(Color.WHITE);
+		username.setCaretColor(new Color(0,255,200));
+		username.setFont(new Font("Segoe UI",Font.BOLD,22));
+		username.setBorder(BorderFactory.createLineBorder(new Color(0,255,200),1));
+		contenedor.add(username);
+		
+		ImageIcon iconUser = new ImageIcon("ICON USER1.PNG");
+		Image imgUser = iconUser.getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH);
+		JLabel iconoUser = new JLabel(new ImageIcon(imgUser));
+		iconoUser.setBounds(70, 165, 20, 20);  // ajusta posición
+		contenedor.add(iconoUser);
+	
 		
 		JLabel contraseña= new JLabel();
 		contraseña.setText("Contraseña:");
@@ -120,13 +144,33 @@ public class Ventana extends JFrame{
 		contraseña.setLocation(100,220);
 		contraseña.setFont(new Font("Segoe UI", Font.PLAIN, 20));//Para darle fuente al texto
 		contraseña.setHorizontalAlignment(JLabel.LEFT);
+		contraseña.setForeground(new Color(180,190,210));
 		contenedor.add(contraseña);
+		
+		JPasswordField password = new JPasswordField();
+		password.setSize(300,30);
+		password.setLocation(100,250);
+		password.setBackground(new Color(30, 35, 55));
+		password.setForeground(Color.WHITE);
+		password.setCaretColor(new Color(0,255,200));
+		password.setFont(new Font("Segoe UI",Font.BOLD,22));
+		password.setBorder(BorderFactory.createLineBorder(new Color(0,255,200),1));
+		contenedor.add(password);
+		
+		ImageIcon iconLock = new ImageIcon("ICON PASSWORD.png");
+		Image imgLock = iconLock.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		JLabel iconoLock = new JLabel(new ImageIcon(imgLock));
+		iconoLock.setBounds(70, 255, 20, 20);
+		contenedor.add(iconoLock);
+		
+		
 		
 		JCheckBox recordar = new JCheckBox();
 		recordar.setText("Recordarme");
 		recordar.setSize(150,30);
 		recordar.setLocation(100,290);
-		recordar.setBackground(new Color(245, 247, 250));
+		recordar.setBackground(new Color(18,22,38));
+		recordar.setForeground(new Color(180,190,210));
 		recordar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		contenedor.add(recordar);
 		
@@ -135,17 +179,28 @@ public class Ventana extends JFrame{
 		olvido.setSize(200,30);
 		olvido.setLocation(250,290);
 		olvido.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		olvido.setForeground(new Color(33,150,243));
+		olvido.setForeground(new Color(0,255,200));
 		contenedor.add(olvido);
 		
 		JButton acceder= new JButton();
 		acceder.setText("Acceder");
-		acceder.setSize(180,50);
+		acceder.setSize(180,45);
 		acceder.setLocation(160,360);
 		acceder.setFont(new Font("Segoe UI",Font.BOLD,22));
-		acceder.setBackground(new Color(33, 150, 243));
-		acceder.setForeground(Color.WHITE);
+		acceder.setBackground(new Color(0,255,200));
+		acceder.setForeground(new Color(18,22,38));
+		acceder.setBorderPainted(false);
+		acceder.setFocusPainted(false);
 		contenedor.add(acceder);
+		
+		ImageIcon login = new ImageIcon("login.jpeg");
+
+		Image img = login.getImage().getScaledInstance(400, 460, Image.SCALE_SMOOTH);
+		ImageIcon loginEscalado = new ImageIcon(img);
+		JLabel vista = new JLabel(loginEscalado);
+		vista.setBounds(480, 20, 400, 460);
+
+		contenedor.add(vista);
 		
 		
 		contenedor.repaint();//refrescar la ventana una vez ejecutada 
