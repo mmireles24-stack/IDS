@@ -1,11 +1,15 @@
 package Main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
@@ -39,7 +43,7 @@ public class Ventana extends JFrame{
 		this.setBackground(Color.BLACK);
 		this.setContentPane(new JPanel() {
 			
-		    protected void paintComponent(Graphics g) {
+		    /*protected void paintComponent(Graphics g) {
 		        super.paintComponent(g);
 		        Graphics2D g2d = (Graphics2D) g;
 
@@ -53,7 +57,7 @@ public class Ventana extends JFrame{
 
 		        g2d.setPaint(gp);
 		        g2d.fillRect(0, 0, getWidth(), getHeight());
-		    }
+		    }*/
 		});
 		//this.getContentPane().setBackground(Color.decode("#0B0B0F"));;
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
@@ -86,7 +90,7 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);*/
 		
-		this.login();//Para mostrar el panel que queremos ver 
+		this.test();//Para mostrar el panel que queremos ver 
 		this.setVisible(true);//para que se vea la ventana
 }
 	public void login ()//Asi se encapsulan los paneles.
@@ -420,6 +424,67 @@ public class Ventana extends JFrame{
 		
 		
 	}
+	
+	public void test() {
+		JPanel test_panel = new JPanel();
+		test_panel.setSize(500, 500);
+		test_panel.setLocation(100, 50);
+		test_panel.setBackground(Color.white);
+		test_panel.setLayout(new BorderLayout(5,5));
+		this.add(test_panel);
+		
+		
+		
+		JLabel users_title = new JLabel("USUARIOS"); 
+		users_title.setFont(new Font("Arial",Font.BOLD,22));
+		users_title.setBackground(Color.decode("#F27A61"));
+		test_panel.add(users_title,BorderLayout.NORTH);
+		
+		JPanel center_panel = new JPanel(); 
+		center_panel.setBackground(Color.decode("#DCC8DE"));
+		center_panel.setLayout(new GridLayout(3,3));
+		
+		center_panel.add(new JButton("7"));
+		center_panel.add(new JButton("8"));
+		center_panel.add(new JButton("9"));
+		center_panel.add(new JButton("4"));
+		center_panel.add(new JButton("5"));
+		center_panel.add(new JButton("6"));
+		center_panel.add(new JButton("1"));
+		center_panel.add(new JButton("2"));
+		center_panel.add(new JButton("3"));
+		test_panel.add(center_panel,BorderLayout.CENTER);
+		
+		JPanel east_panel = new JPanel(); 
+		east_panel.setBackground(Color.decode("#DCC8DE"));
+		east_panel.setLayout(new GridLayout(4,0));
+		
+		east_panel.add(new JButton("*"));
+		east_panel.add(new JButton("/"));
+		east_panel.add(new JButton("-"));
+		east_panel.add(new JButton("+"));
+		test_panel.add(east_panel,BorderLayout.EAST);
+		
+		JPanel north_panel = new JPanel();  
+		north_panel.setBackground(Color.green);
+		north_panel.setLayout(new FlowLayout(0,10,10));
+		
+		north_panel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
+		north_panel.add(new JButton("1"));
+		north_panel.add(new JButton("2"));
+		north_panel.add(new JButton("3"));
+		north_panel.add(new JButton("4"));
+		north_panel.add(new JButton("5"));
+		
+		test_panel.add(north_panel,BorderLayout.NORTH);
+		
+
+	
+	}
+	
+	
+	
 }
 
 
