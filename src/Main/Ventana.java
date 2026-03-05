@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Ventana extends JFrame{
 
@@ -41,7 +42,7 @@ public class Ventana extends JFrame{
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("Login");
 		this.setBackground(Color.BLACK);
-		this.setContentPane(new JPanel() {
+		//this.setContentPane(new JPanel() {
 			
 		    /*protected void paintComponent(Graphics g) {
 		        super.paintComponent(g);
@@ -58,7 +59,7 @@ public class Ventana extends JFrame{
 		        g2d.setPaint(gp);
 		        g2d.fillRect(0, 0, getWidth(), getHeight());
 		    }*/
-		});
+		//});
 		//this.getContentPane().setBackground(Color.decode("#0B0B0F"));;
 		this.setLayout(null);//Es para tener un marco, aqui no tenemos por el null
 		this.setLocation(200,200);
@@ -427,22 +428,61 @@ public class Ventana extends JFrame{
 	
 	public void test() {
 		JPanel test_panel = new JPanel();
-		test_panel.setSize(500, 500);
-		test_panel.setLocation(100, 50);
-		test_panel.setBackground(Color.white);
-		test_panel.setLayout(new BorderLayout(5,5));
+		test_panel.setSize(400, 500);
+		test_panel.setLocation(350, 50);
+		test_panel.setBackground(Color.decode("#FCE4EC"));
+		test_panel.setLayout(new BorderLayout(0,0));
+		test_panel.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(Color.decode("#ECA8F0"), 4, true),
+                        BorderFactory.createEmptyBorder(20,20,20,20)
+                )
+        );
 		this.add(test_panel);
 		
+		JPanel north_panel = new JPanel();
+		north_panel.setBackground(Color.decode("#FCE4EC"));
+		north_panel.setLayout(new BorderLayout());
+		
+		JLabel users_title = new JLabel("100.0"); 
+		users_title.setFont(new Font("Segoe UI", Font.BOLD,38));
+		users_title.setHorizontalAlignment(JLabel.RIGHT);
+		users_title.setOpaque(true);
+		users_title.setBackground(Color.WHITE);
+		users_title.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		north_panel.add(users_title,BorderLayout.NORTH);
 		
 		
-		JLabel users_title = new JLabel("USUARIOS"); 
-		users_title.setFont(new Font("Arial",Font.BOLD,22));
-		users_title.setBackground(Color.decode("#F27A61"));
-		test_panel.add(users_title,BorderLayout.NORTH);
+		JPanel south_panel = new JPanel();  
+		south_panel.setBackground(Color.decode("#F8BBD0"));
+		south_panel.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
+		
+		//south_panel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
+		Font fuente = new Font("Arial", Font.BOLD, 14);
+		JButton b1 = new JButton("MC");
+		b1.setFont(fuente);
+		JButton b2 = new JButton("M+");
+		b2.setFont(fuente);
+		JButton b3 = new JButton("M-");
+		b3.setFont(fuente);
+		JButton b4 = new JButton("√");
+		b4.setFont(fuente);
+		JButton b5 = new JButton("%");
+		b5.setFont(fuente);
+		south_panel.add(b1);
+		south_panel.add(b2);
+		south_panel.add(b3);
+		south_panel.add(b4);
+		south_panel.add(b5);
+		north_panel.add(south_panel,BorderLayout.SOUTH);
+		test_panel.add(north_panel, BorderLayout.NORTH);
+		
 		
 		JPanel center_panel = new JPanel(); 
-		center_panel.setBackground(Color.decode("#DCC8DE"));
-		center_panel.setLayout(new GridLayout(3,3));
+		center_panel.setBackground(Color.decode("#F8BBD0"));
+		center_panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		center_panel.setLayout(new GridLayout(4,3,10,10));
 		
 		center_panel.add(new JButton("7"));
 		center_panel.add(new JButton("8"));
@@ -453,37 +493,24 @@ public class Ventana extends JFrame{
 		center_panel.add(new JButton("1"));
 		center_panel.add(new JButton("2"));
 		center_panel.add(new JButton("3"));
+		center_panel.add(new JButton("0"));
+		center_panel.add(new JButton("."));
+		center_panel.add(new JButton("= "));
+		
 		test_panel.add(center_panel,BorderLayout.CENTER);
 		
 		JPanel east_panel = new JPanel(); 
-		east_panel.setBackground(Color.decode("#DCC8DE"));
-		east_panel.setLayout(new GridLayout(4,0));
+		east_panel.setBackground(Color.decode("#F8BBD0"));
+		east_panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		east_panel.setLayout(new GridLayout(4,0,10,10));
 		
 		east_panel.add(new JButton("*"));
 		east_panel.add(new JButton("/"));
 		east_panel.add(new JButton("-"));
 		east_panel.add(new JButton("+"));
 		test_panel.add(east_panel,BorderLayout.EAST);
-		
-		JPanel north_panel = new JPanel();  
-		north_panel.setBackground(Color.green);
-		north_panel.setLayout(new FlowLayout(0,10,10));
-		
-		north_panel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		
-		north_panel.add(new JButton("1"));
-		north_panel.add(new JButton("2"));
-		north_panel.add(new JButton("3"));
-		north_panel.add(new JButton("4"));
-		north_panel.add(new JButton("5"));
-		
-		test_panel.add(north_panel,BorderLayout.NORTH);
-		
-
 	
-	}
-	
-	
+	}	
 	
 }
 
