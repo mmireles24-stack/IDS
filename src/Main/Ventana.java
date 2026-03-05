@@ -91,7 +91,7 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);*/
 		
-		this.test();//Para mostrar el panel que queremos ver 
+		this.interes();//Para mostrar el panel que queremos ver 
 		this.setVisible(true);//para que se vea la ventana
 }
 	public void login ()//Asi se encapsulan los paneles.
@@ -512,6 +512,50 @@ public class Ventana extends JFrame{
 	
 	}	
 	
+	
+	public void interes() 
+	{
+		JPanel calculadora = new JPanel();
+		calculadora.setSize(320,420);
+		calculadora.setLocation(330,80);
+		calculadora.setBackground(new Color(230,230,230));
+		calculadora.setLayout(new BorderLayout(50,50));
+		this.add(calculadora);
+		
+		JLabel title = new JLabel("INTERES");
+		title.setFont(new Font("Arial",Font.BOLD,28));
+		title.setBackground(new Color(230,230,230));
+		calculadora.add(title,BorderLayout.NORTH);
+		
+		// panel botones
+		JPanel botones = new JPanel();
+		botones.setLayout(new GridLayout(0,2));
+		botones.setBackground(new Color(230,230,230));
+
+		// fila 1
+		botones.add(new JLabel("capital"));
+		botones.add(new JTextField());
+		botones.add(new JLabel("tiempo"));
+		botones.add(new JTextField());
+		botones.add(new JLabel("tasa interes"));
+		botones.add(new JTextField());
+		botones.add(new JButton("calcular"));
+		botones.add(new JButton("cancelar"));
+
+		calculadora.add(botones,BorderLayout.CENTER);
+		
+		JPanel inferior = new JPanel();
+		inferior.setLayout(new GridLayout(0,2));
+		inferior.setBackground(new Color(230,230,230));
+
+		// fila 1
+		inferior.add(new JLabel("Interes:"));
+		inferior.add(new JTextField());
+		inferior.add(new JLabel("Monto:"));
+		inferior.add(new JTextField());
+		
+		calculadora.add(inferior,BorderLayout.SOUTH);
+	}
 }
 
 
