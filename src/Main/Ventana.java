@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -42,6 +43,10 @@ public class Ventana extends JFrame{
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("Login");
 		this.setBackground(Color.BLACK);
+		
+		Toolkit logo_windows = Toolkit.getDefaultToolkit();
+		Image icono = logo_windows.getImage("logoMJ.png");
+		this.setIconImage(icono);
 		//this.setContentPane(new JPanel() {
 			
 		    /*protected void paintComponent(Graphics g) {
