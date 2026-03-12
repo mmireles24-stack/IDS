@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -12,7 +13,11 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -95,8 +100,9 @@ public class Ventana extends JFrame{
 		archivo.add(submenu);
 		
 		this.setJMenuBar(barra);*/
+		this.pintar();
 		
-		this.interes();//Para mostrar el panel que queremos ver 
+		//this.test();//Para mostrar el panel que queremos ver 
 		this.setVisible(true);//para que se vea la ventana
 }
 	public void login ()//Asi se encapsulan los paneles.
@@ -560,6 +566,65 @@ public class Ventana extends JFrame{
 		inferior.add(new JTextField());
 		
 		calculadora.add(inferior,BorderLayout.SOUTH);
+	}
+	
+	public void pintar() {
+		JPanel pane = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.drawLine(0,0,100,100); //dibuja lineas
+                
+                g2d.setColor(Color.red);//Da color
+                g2d.setStroke(new BasicStroke(3));//Da el grosor de la linea
+                
+                g2d.drawLine(200, 200, 500, 200);
+                
+                g2d.drawRect(250, 250, 100, 100);
+                
+                g2d.setColor(Color.green);
+                g2d.drawOval(400,100,50,90);
+                g2d.setStroke(new BasicStroke(5));
+                
+                g2d.setColor(Color.orange);
+                g2d.fillOval(400,200,50,90);//figura rellenada
+               
+                g2d.setColor(Color.green);
+                g2d.drawArc(300, 100, 100, 100, 90, 90);
+                
+                g2d.setColor(Color.orange);
+                g2d.fillArc(300,300,100,100,0,300);//figura rellenada
+                
+                
+                g2d.setColor(Color.green);
+                //200,100,300
+                //100,300,500
+                g2d.drawPolygon(new int[] {200,100,300},new int[] {100,300,500},3);
+                
+                g2d.setColor(Color.orange);
+                g2d.fillPolygon(new int[] {400,300,500},new int[] {200,400,500},3);
+                
+                g2d.setColor(Color.orange);
+                g2d.fillRect(500,300,100,100);//figura rellenada
+                
+                try {
+                	 BufferedImage image = ImageIO.read(new File("src/img/logoMj.png"));
+                	 g2d.drawImage(image, 500, 30, null);
+                	
+                } catch(IOException e) {
+                	e.printStackTrace();
+                	
+                }
+               
+                
+            }
+        };
+        
+        pane.setSize(1200,700);
+        pane.setLocation(0,0);
+        this.add(pane);
 	}
 }
 
