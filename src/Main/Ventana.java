@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -105,7 +106,7 @@ public class Ventana extends JFrame{
 		//this.pintar();
 		//this.casa();
 		
-		this.registro();//Para mostrar el panel que queremos ver 
+		//this.registro();//Para mostrar el panel que queremos ver 
 		this.login();//Para mostrar el panel que queremos ver 
 		this.setVisible(true);//para que se vea la ventana
 }
@@ -220,6 +221,9 @@ public class Ventana extends JFrame{
 				String username_val = username.getText();
 				String password_val = new String(password.getPassword());
 				
+				String user_correcto = "Maryfer11";
+				String pass_correcto = "123456";
+				
 				if(username_val.equals("") || username_val.contains(" ")){
 					username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
 				}else { 
@@ -231,8 +235,12 @@ public class Ventana extends JFrame{
 				}else { 
 					password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
 				}	
-			}
-			
+				if(username_val.equals(user_correcto) && password_val.equals(pass_correcto)){
+		            JOptionPane.showMessageDialog(null, "  Bienvenido ");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+		        }
+		    }
 		});
 		
 		ImageIcon login = new ImageIcon("login.jpeg");
