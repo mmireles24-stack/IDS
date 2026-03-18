@@ -13,6 +13,8 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -101,9 +103,10 @@ public class Ventana extends JFrame{
 		
 		this.setJMenuBar(barra);*/
 		//this.pintar();
-		this.casa();
+		//this.casa();
 		
-		//this.test();//Para mostrar el panel que queremos ver 
+		this.registro();//Para mostrar el panel que queremos ver 
+		this.login();//Para mostrar el panel que queremos ver 
 		this.setVisible(true);//para que se vea la ventana
 }
 	public void login ()//Asi se encapsulan los paneles.
@@ -209,6 +212,28 @@ public class Ventana extends JFrame{
 		acceder.setBorderPainted(false);
 		acceder.setFocusPainted(false);
 		contenedor.add(acceder);
+		
+		acceder.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String username_val = username.getText();
+				String password_val = new String(password.getPassword());
+				
+				if(username_val.equals("") || username_val.contains(" ")){
+					username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+				}else { 
+					username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+				}	
+				
+				if(password_val.length() < 	6 || password_val.contains(" ")) {
+					password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+				}else { 
+					password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+				}	
+			}
+			
+		});
 		
 		ImageIcon login = new ImageIcon("login.jpeg");
 
@@ -327,6 +352,46 @@ public class Ventana extends JFrame{
 				create_account.setBackground(new Color(25, 118, 210));
 				create_account.setForeground(Color.WHITE);
 				register_container.add(create_account);
+				create_account.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						String username1_val = username1.getText();
+						String bio_val = bio.getText();
+						
+						
+						
+						if(username1_val.equals("") || username1_val.contains(" ")){
+							username1.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+						}else { 
+							username1.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+						}	
+						
+						if(bio_val.equals("")) {
+							bio.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+						}else { 
+							bio.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+						}	
+						if(!sweet_option.isSelected() && !salty_option.isSelected() && !healthy_option.isSelected()){
+				            sweet_option.setForeground(Color.red);
+				            salty_option.setForeground(Color.red);
+				            healthy_option.setForeground(Color.red);
+				        } else { 
+				            sweet_option.setForeground(Color.black);
+				            salty_option.setForeground(Color.black);
+				            healthy_option.setForeground(Color.black);
+				        }
+				        
+	
+						 if(!accept_terms.isSelected()) {
+					            accept_terms.setForeground(Color.red);
+					    }else { 
+					         accept_terms.setForeground(Color.black);
+					        }   	
+					}
+					
+				});
+				
 				
 				register_container.repaint();
 		
@@ -764,9 +829,6 @@ public class Ventana extends JFrame{
                 g2d.drawPolygon(new int [] {1100,1120,1140},new int [] {440,410,440},3);
                 g2d.drawPolygon(new int [] {1160,1180,1200},new int [] {440,410,440},3);
                 
-                
-                
-            
                 
                 //CASA
                 g2d.setColor(Color.decode("#A63A2B"));
