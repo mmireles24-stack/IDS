@@ -39,7 +39,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
 
 public class Ventana extends JFrame {
 
@@ -434,6 +434,7 @@ public class Ventana extends JFrame {
 	}
 
 	public void users() {
+
 
 		JPanel users = new JPanel();
 		users.setSize(950, 500);
@@ -1199,4 +1200,5 @@ public class Ventana extends JFrame {
 		this.add(pane1);
 	}
 
-}
+}	
+		
