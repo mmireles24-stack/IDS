@@ -71,61 +71,18 @@ public class Ventana extends JFrame {
 		// this.getContentPane().setBackground(Color.decode("#0B0B0F"));;
 		this.setLayout(null);// Es para tener un marco, aqui no tenemos por el null
 		this.setLocation(200, 200);
-		JMenuBar barra = new JMenuBar();
+	
 
-		JMenu menu = new JMenu("Navegación");
 
-		JMenuItem loginItem = new JMenuItem("Login");
-		JMenuItem registroItem = new JMenuItem("Registro");
-
-		// EVENTOS (AQUÍ ESTÁ LA CLAVE DEL EJERCICIO)
-		loginItem.addActionListener(e -> {
-		    router("login");
-		});
-
-		registroItem.addActionListener(e -> {
-		    router("registro");
-		});
-
-		menu.add(loginItem);
-		menu.add(registroItem);
-
-		barra.add(menu);
-
-		this.setJMenuBar(barra);
-		/*JMenuBar barra = new JMenuBar();
-
-		JMenu archivo = new JMenu("Archivo");
-
-		JMenuItem open = new JMenuItem("Abrir");
-		JMenuItem close = new JMenuItem("Cerrar");
-		JMenuItem save = new JMenuItem("Guardar");
-		JMenuItem newFile = new JMenuItem("Nuevo");
-
-		archivo.add(open);
-		archivo.add(close);
-		archivo.add(save);
-		archivo.add(newFile);
-		barra.add(archivo);
-
-		JMenu submenu = new JMenu("Otros");
-		archivo.addSeparator();
-
-		JMenuItem menuItem = new JMenuItem("An item in the submenu");
-		submenu.add(menuItem);
-
-		menuItem = new JMenuItem("Another Item");
-		submenu.add(menuItem);
-		archivo.add(submenu);
-
-		this.setJMenuBar(barra);*/
+		
 		// this.pintar();
 		// this.casa();
 		//this.router("registro");
-		this.router("login");
+		this.Baja();
+		//this.router("login");
 		//this.login();
 		// this.registro();//Para mostrar el panel que queremos ver
-		// this.mario();//Para mostrar el panel que queremos ver
+		 this.menu();//Para mostrar el panel que queremos ver
 		this.setVisible(true);// para que se vea la ventana
 	}
 
@@ -524,18 +481,225 @@ public class Ventana extends JFrame {
 		users.repaint();
 
 	}
-	public void router(String target) {
-	    this.getContentPane().removeAll();
+	
+	   
+    public void menu(){
 
-	    if (target.equals("login")) {
-	        this.login();
-	    } else if (target.equals("registro")) {
-	        this.registro();
-	    }
+        JMenuBar barra = new JMenuBar();
 
-	    this.revalidate();
-	    this.repaint();
-	}
+        JMenu cuenta = new JMenu("Cuenta");
+        JMenu usuarios = new JMenu("Usuarios");
+        JMenu ayuda = new JMenu("Ayuda");
+        
+        JMenuItem login = new JMenuItem("Login");
+        JMenuItem registro = new JMenuItem("Registro");
+        JMenuItem recovery = new JMenuItem("Recuperar contraseña");
+
+        JMenuItem alta = new JMenuItem("Alta");
+        JMenuItem baja = new JMenuItem("Baja");
+        JMenuItem consultar = new JMenuItem("Consultar");
+        
+        JMenuItem comoCrear = new JMenuItem("¿Cómo crear un usuario?");
+        JMenuItem comoAcceder = new JMenuItem("¿Cómo acceder al sistema?");
+        JMenuItem olvideContra = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+        
+
+        login.addActionListener(e -> router("login"));
+        registro.addActionListener(e -> router("registro"));
+        recovery.addActionListener(e -> router("recovery"));
+
+        alta.addActionListener(e -> router("alta"));
+        baja.addActionListener(e -> router("baja"));
+        consultar.addActionListener(e -> router("consultar"));
+        
+        comoCrear.addActionListener(e -> router("¿Cómo crear un usuario?"));
+        comoAcceder.addActionListener(e -> router("¿Cómo acceder al sistema?"));
+        olvideContra.addActionListener(e -> router("¿Qué pasa si olvidé mi contraseña?"));
+
+        cuenta.add(login);
+        cuenta.add(registro);
+        cuenta.add(recovery);
+
+        usuarios.add(alta);
+        usuarios.add(baja);
+        usuarios.add(consultar);
+        
+        ayuda.add(comoCrear);
+        ayuda.add(comoAcceder);
+        ayuda.add(olvideContra);
+
+        barra.add(cuenta);
+        barra.add(usuarios);
+        barra.add(ayuda);
+
+        this.setJMenuBar(barra);
+    }
+
+  
+    public void router(String target){
+
+        this.getContentPane().removeAll();
+        this.menu();
+
+        if(target.equals("login")){
+            login();
+        }
+
+        if(target.equals("registro")){
+            registro();
+        }
+
+        if(target.equals("recovery")){
+            recovery_password();
+        }
+
+        if(target.equals("alta")){
+            Alta();
+        }
+
+        if(target.equals("baja")){
+            Baja();
+        }
+
+        if(target.equals("consultar")){
+            Consultar();
+        }
+        
+        if(target.equals("¿Cómo crear un usuario?")){
+        	comoCrear();
+        }
+        
+        if(target.equals("¿Cómo acceder al sistema?")){
+        	comoAcceder();
+        }
+        
+        if(target.equals("¿Qué pasa si olvidé mi contraseña?")){
+        	olvideContra();
+        }
+        
+        
+
+        this.repaint();
+        this.revalidate();
+    }
+
+    
+   
+
+    
+    public void recovery_password(){
+
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(null);
+        panel.setBounds(0,0,1200,600);
+
+        JLabel titulo = new JLabel("RECUPERAR CONTRASEÑA");
+        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+        titulo.setBounds(420,200,400,50);
+
+        panel.add(titulo);
+
+        this.add(panel);
+    }
+
+   
+    public void Alta(){
+
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(null);
+        panel.setBounds(0,0,1200,600);
+
+        JLabel titulo = new JLabel("ALTA DE USUARIO");
+        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+        titulo.setBounds(450,200,400,50);
+
+        panel.add(titulo);
+
+        this.add(panel);
+    }
+
+    
+    public void Baja(){
+
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(null);
+        panel.setBounds(0,0,1200,600);
+
+        JLabel titulo = new JLabel("BAJA DE USUARIO");
+        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+        titulo.setBounds(450,200,400,50);
+
+        panel.add(titulo);
+
+        this.add(panel);
+    }
+
+  
+    public void Consultar(){
+
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
+        panel.setLayout(null);
+        panel.setBounds(0,0,1200,600);
+
+        JLabel titulo = new JLabel("CONSULTAR USUARIOS");
+        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+        titulo.setBounds(430,200,400,50);
+
+        panel.add(titulo);
+
+        this.add(panel);
+    }
+    
+    public void comoCrear(){
+    	
+    	JPanel panel = new JPanel();
+    	panel.setBackground(Color.WHITE);
+    	panel.setLayout(null);
+    	panel.setBounds(0,0,1200,600);
+    	
+    	JLabel titulo = new JLabel("CONSULTAR USUARIOS");
+    	titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+    	titulo.setBounds(430,200,400,50);
+    	
+    	panel.add(titulo);
+    	
+    	this.add(panel);
+    }
+    public void comoAcceder(){
+    	
+    	JPanel panel = new JPanel();
+    	panel.setBackground(Color.WHITE);
+    	panel.setLayout(null);
+    	panel.setBounds(0,0,1200,600);
+    	
+    	JLabel titulo = new JLabel("CONSULTAR USUARIOS");
+    	titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+    	titulo.setBounds(430,200,400,50);
+    	
+    	panel.add(titulo);
+    	
+    	this.add(panel);
+    }
+    public void olvideContra(){
+    	
+    	JPanel panel = new JPanel();
+    	panel.setBackground(Color.WHITE);
+    	panel.setLayout(null);
+    	panel.setBounds(0,0,1200,600);
+    	
+    	JLabel titulo = new JLabel("CONSULTAR USUARIOS");
+    	titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
+    	titulo.setBounds(430,200,400,50);
+    	
+    	panel.add(titulo);
+    	
+    	this.add(panel);
+    }
+
 	/*public void test() {
 		JPanel test_panel = new JPanel();
 		test_panel.setSize(400, 500);
