@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -39,6 +40,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 public class Ventana extends JFrame {
@@ -78,7 +80,7 @@ public class Ventana extends JFrame {
 		// this.pintar();
 		// this.casa();
 		//this.router("registro");
-		this.Baja();
+		this.login();
 		//this.router("login");
 		//this.login();
 		// this.registro();//Para mostrar el panel que queremos ver
@@ -86,8 +88,10 @@ public class Ventana extends JFrame {
 		this.setVisible(true);// para que se vea la ventana
 	}
 
-	public void login()// Asi se encapsulan los paneles.
+	public void login()
 	{
+		this.getContentPane().removeAll(); 
+	    this.menu();
 		JPanel contenedor = new JPanel();
 		contenedor.setBackground(new Color(18, 22, 38));
 		contenedor.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
@@ -167,12 +171,16 @@ public class Ventana extends JFrame {
 		recordar.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		contenedor.add(recordar);
 
-		JLabel olvido = new JLabel();
+		JButton olvido = new JButton();
 		olvido.setText("¿Olvidó su contraseña?");
+		olvido.setContentAreaFilled(false);
+		olvido.setBorderPainted(false);
+		olvido.setFocusPainted(false);
 		olvido.setSize(200, 30);
 		olvido.setLocation(250, 290);
 		olvido.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		olvido.setForeground(new Color(0, 255, 200));
+		olvido.addActionListener(e -> router("recovery"));
 		contenedor.add(olvido);
 
 		JButton acceder = new JButton();
@@ -230,18 +238,22 @@ public class Ventana extends JFrame {
 		contenedor.add(registro);
 
 		registro.addActionListener(e -> {
+			
 			// System.out.println("Hola");
 			// System.out.println(e);
 			this.router("registro");
 		});
 
-		contenedor.repaint();// refrescar la ventana una vez ejecutada
-		contenedor.revalidate();
+		/*contenedor.repaint();// refrescar la ventana una vez ejecutada
+		contenedor.revalidate();*/
+		this.repaint();
+	    this.revalidate();
+		
 
 	}
 
 	public void registro() {
-		// REGISTER---
+		
 
 		JPanel register_container = new JPanel();// seria nuestra hoja
 		register_container.setOpaque(true);
@@ -390,31 +402,41 @@ public class Ventana extends JFrame {
 
 	}
 
-	public void users() {
+	public void consultar() {
 
+	    JPanel panelPrincipal = new JPanel();
+	    panelPrincipal.setBackground(new Color(243, 244, 246));
+	    panelPrincipal.setLayout(null);
+	    panelPrincipal.setBounds(0, 0, 1200, 600);
 
-		JPanel users = new JPanel();
-		users.setSize(950, 500);
-		users.setLocation(100, 30);
-		users.setBackground(Color.decode("#E3E3DC"));
-		users.setLayout(null);
-		this.add(users);
+	    JPanel card = new JPanel();
+	    card.setBackground(Color.WHITE);
+	    card.setLayout(null);
+	    card.setBounds(100, 30, 950, 500);
+	    card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
 
-		JLabel users_title = new JLabel("Usuarios");
-		users_title.setBounds(400, 30, 150, 50);
-		users_title.setHorizontalAlignment(JLabel.CENTER);
-		users_title.setOpaque(true);
-		users_title.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		users_title.setBackground((Color.decode("#EDD15F")));
-		users.add(users_title);
+	    JLabel users_title = new JLabel("GESTIÓN DE USUARIOS");
+	    users_title.setBounds(0, 20, 950, 40);
+	    users_title.setHorizontalAlignment(JLabel.CENTER);
+	    users_title.setFont(new Font("Segoe UI", Font.BOLD, 24));
+	    users_title.setForeground(new Color(30, 35, 55));
+	    card.add(users_title);
+	    
+	    JButton export = new JButton("Exportar PDF");
+	    export.setBounds(30, 80, 120, 35);
+	    export.setBackground(new Color(30, 58, 138)); 
+	    export.setForeground(Color.WHITE);
+	    export.setFocusPainted(false);
+	    card.add(export);
 
-		JButton export = new JButton("Exportar");
-		export.setBounds(30, 120, 100, 40);
-		users.add(export);
-
-		JButton add = new JButton("Añadir");
-		add.setBounds(140, 120, 100, 40);
-		users.add(add);
+	    JButton add = new JButton("Añadir Nuevo");
+	    add.setBounds(160, 80, 130, 35);
+	    add.setBackground(new Color(0, 255, 200)); 
+	    add.setForeground(Color.BLACK);
+	    add.setFocusPainted(false);
+	    
+	    add.addActionListener(e -> router("alta")); 
+	    card.add(add);
 
 		Object[] table_head = { "NO. DE CONTROL", "NOMBRE", "APELLIDOS", "SEMESTRE", "PROMEDIO", "ACCION" };
 
@@ -473,13 +495,27 @@ public class Ventana extends JFrame {
 				{ "10531", "Julio", "Cortes", "1", "8.4", "Editar" } };
 
 		JTable users_table = new JTable(table_content, table_head);
+		
+	    users_table.setRowHeight(30); 
+	    users_table.setSelectionBackground(new Color(0, 255, 200, 50)); 
+	    users_table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+	    users_table.setShowVerticalLines(false); 
+	    
+	    users_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+	    users_table.getTableHeader().setBackground(new Color(30, 35, 55)); // Fondo oscuro
+	    users_table.getTableHeader().setForeground(Color.WHITE); // Texto blanco
+	    users_table.getTableHeader().setReorderingAllowed(false); // No mover columnas
 
-		JScrollPane scroll = new JScrollPane(users_table);
-		scroll.setBounds(30, 170, 800, 300);
-		users.add(scroll);
+	    JScrollPane scroll = new JScrollPane(users_table);
+	    scroll.setBounds(30, 130, 890, 330);
+	    scroll.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230)));
+	    card.add(scroll);
 
-		users.repaint();
+	    panelPrincipal.add(card);
+	    this.add(panelPrincipal);
 
+	    this.repaint();
+	    this.revalidate();
 	}
 	
 	   
@@ -496,7 +532,6 @@ public class Ventana extends JFrame {
         JMenuItem recovery = new JMenuItem("Recuperar contraseña");
 
         JMenuItem alta = new JMenuItem("Alta");
-        JMenuItem baja = new JMenuItem("Baja");
         JMenuItem consultar = new JMenuItem("Consultar");
         
         JMenuItem comoCrear = new JMenuItem("¿Cómo crear un usuario?");
@@ -509,7 +544,6 @@ public class Ventana extends JFrame {
         recovery.addActionListener(e -> router("recovery"));
 
         alta.addActionListener(e -> router("alta"));
-        baja.addActionListener(e -> router("baja"));
         consultar.addActionListener(e -> router("consultar"));
         
         comoCrear.addActionListener(e -> router("¿Cómo crear un usuario?"));
@@ -521,7 +555,6 @@ public class Ventana extends JFrame {
         cuenta.add(recovery);
 
         usuarios.add(alta);
-        usuarios.add(baja);
         usuarios.add(consultar);
         
         ayuda.add(comoCrear);
@@ -557,12 +590,9 @@ public class Ventana extends JFrame {
             Alta();
         }
 
-        if(target.equals("baja")){
-            Baja();
-        }
 
         if(target.equals("consultar")){
-            Consultar();
+            consultar();
         }
         
         if(target.equals("¿Cómo crear un usuario?")){
@@ -589,115 +619,438 @@ public class Ventana extends JFrame {
     
     public void recovery_password(){
 
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(null);
-        panel.setBounds(0,0,1200,600);
+	    JPanel panelPrincipal = new JPanel();
+	    panelPrincipal.setBackground(new Color(243, 244, 246)); 
+	    panelPrincipal.setLayout(null);
+	    panelPrincipal.setBounds(0, 0, 1200, 600);
 
-        JLabel titulo = new JLabel("RECUPERAR CONTRASEÑA");
-        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-        titulo.setBounds(420,200,400,50);
+	    
+	    JPanel card = new JPanel();
+	    card.setBackground(Color.WHITE);
+	    card.setLayout(null);
+	    card.setBounds(400, 100, 400, 400);
+	    card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
 
-        panel.add(titulo);
+	  
+	    JLabel titulo = new JLabel("¿Olvidaste tu contraseña?", SwingConstants.CENTER);
+	    titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+	    titulo.setBounds(0, 90, 400, 30);
+	    card.add(titulo);
 
-        this.add(panel);
+	    
+	    JLabel desc = new JLabel("Te enviaremos un código a tu correo", SwingConstants.CENTER);
+	    desc.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+	    desc.setForeground(Color.GRAY);
+	    desc.setBounds(50, 130, 300, 40);
+	    card.add(desc);
+
+	    JLabel lblEmail = new JLabel("Email");
+	    lblEmail.setFont(new Font("Segoe UI", Font.BOLD, 12));
+	    lblEmail.setBounds(50, 190, 300, 20);
+	    card.add(lblEmail);
+
+	    JTextField txtEmail = new JTextField(" ");
+	    txtEmail.setBounds(50, 215, 300, 40);
+	    txtEmail.setBorder(BorderFactory.createCompoundBorder(
+	        BorderFactory.createLineBorder(new Color(200, 200, 200)),
+	        BorderFactory.createEmptyBorder(0, 10, 0, 10) 
+	    ));
+	    card.add(txtEmail);
+
+	    
+	    JButton btnReset = new JButton("Restablecer contraseña");
+	    btnReset.setBounds(50, 280, 300, 45);
+	    btnReset.setBackground(new Color(0, 255, 200)); 
+	    btnReset.setForeground(Color.BLACK);
+	    btnReset.setFont(new Font("Segoe UI", Font.BOLD, 14));
+	    btnReset.setFocusPainted(false);
+	    btnReset.setBorderPainted(false);
+	    btnReset.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    card.add(btnReset);
+
+	    
+	    JButton btnVolver = new JButton("Volver al inicio");
+	    btnVolver.setBounds(50, 340, 300, 30);
+	    btnVolver.setContentAreaFilled(false);
+	    btnVolver.setBorderPainted(false);
+	    btnVolver.setForeground(new Color(30, 58, 138));
+	    btnVolver.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+	    btnVolver.addActionListener(e -> router("login"));
+	    card.add(btnVolver);
+	    btnReset.addActionListener(e -> {
+	        String email = txtEmail.getText();
+	        
+	        if (email.contains("@") && !email.isEmpty()) {
+	            update_password_view();
+	        } else {
+	            txtEmail.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+	            JOptionPane.showMessageDialog(null, "Ingresa un correo válido.");
+	        }
+	    });
+	    
+	    panelPrincipal.add(card);
+	    this.add(panelPrincipal);
+	}
+    
+    public void update_password_view() {
+        this.getContentPane().removeAll();
+        this.menu();
+
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(243, 244, 246));
+        panelPrincipal.setLayout(null);
+        panelPrincipal.setBounds(0, 0, 1200, 600);
+
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setLayout(null);
+        card.setBounds(400, 80, 400, 480); // Un poco más alto para los nuevos campos
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
+
+        JLabel titulo = new JLabel("Verificación", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setBounds(0, 30, 400, 30);
+        card.add(titulo);
+
+        JLabel lblCodigo = new JLabel("Código de verificación:");
+        lblCodigo.setBounds(50, 80, 300, 20);
+        card.add(lblCodigo);
+
+        JTextField txtCodigo = new JTextField();
+        txtCodigo.setBounds(50, 105, 300, 40);
+        txtCodigo.setHorizontalAlignment(JTextField.CENTER);
+        card.add(txtCodigo);
+
+        JLabel lblPass = new JLabel("Nueva Contraseña:");
+        lblPass.setBounds(50, 160, 300, 20);
+        card.add(lblPass);
+
+        JPasswordField txtPass = new JPasswordField();
+        txtPass.setBounds(50, 185, 300, 40);
+        card.add(txtPass);
+        
+        JLabel lblConfirm = new JLabel("Confirmar Contraseña:");
+        lblConfirm.setBounds(50, 240, 300, 20);
+        card.add(lblConfirm);
+
+        JPasswordField txtConfirm = new JPasswordField();
+        txtConfirm.setBounds(50, 265, 300, 40);
+        card.add(txtConfirm);
+
+        JButton btnActualizar = new JButton("Verificar y Actualizar");
+        btnActualizar.setBounds(50, 330, 300, 45);
+        btnActualizar.setBackground(new Color(0, 255, 200));
+        btnActualizar.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnActualizar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnActualizar.addActionListener(e -> {
+            String codigo = txtCodigo.getText();
+            String pass1 = new String(txtPass.getPassword());
+            String pass2 = new String(txtConfirm.getPassword());
+
+            boolean codigoOk = codigo.equals("1234");
+            boolean coinciden = pass1.equals(pass2) && !pass1.isEmpty();
+
+            txtCodigo.setBorder(BorderFactory.createLineBorder(codigoOk ? Color.GREEN : Color.RED, 2));
+            
+            if (coinciden) {
+                txtPass.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+                txtConfirm.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+            } else {
+                txtPass.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                txtConfirm.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+            }
+
+            if (codigoOk && coinciden) {
+                JOptionPane.showMessageDialog(null, "¡Contraseña actualizada con éxito!");
+                router("login");
+            } else if (!codigoOk) {
+                JOptionPane.showMessageDialog(null, "El código de verificación es incorrecto.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+            }
+        });
+        card.add(btnActualizar);
+
+        panelPrincipal.add(card);
+        this.add(panelPrincipal);
+        this.repaint();
+        this.revalidate();
     }
 
    
-    public void Alta(){
+    public void Alta() {
+        this.getContentPane().removeAll();
+        this.menu();
 
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(null);
-        panel.setBounds(0,0,1200,600);
+        
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(243, 244, 246)); 
+        panelPrincipal.setLayout(null);
+        panelPrincipal.setBounds(0, 0, 1200, 600);
 
-        JLabel titulo = new JLabel("ALTA DE USUARIO");
-        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-        titulo.setBounds(450,200,400,50);
+        
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setLayout(null);
+        card.setBounds(350, 50, 500, 500); 
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
 
-        panel.add(titulo);
+        
+        JLabel titulo = new JLabel("REGISTRO DE NUEVO USUARIO", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setForeground(new Color(30, 35, 55));
+        titulo.setBounds(0, 30, 500, 30);
+        card.add(titulo);
 
-        this.add(panel);
+        
+        JLabel jlbnombre = crearLabelForm("Nombre:", 80);
+        card.add(jlbnombre);
+        JTextField nombre = crearTextFieldForm(110);
+        card.add(nombre);
+
+        
+        JLabel jlbapellido = crearLabelForm("Apellido:", 160);
+        card.add(jlbapellido);
+        JTextField apellido = crearTextFieldForm(190);
+        card.add(apellido);
+
+        
+        JLabel jlbUser = crearLabelForm("Correo Electrónico:", 240);
+        card.add(jlbUser);
+        JTextField email = crearTextFieldForm(270);
+        card.add(email);
+
+        
+        JButton btnRegistrar = new JButton("DAR DE ALTA");
+        btnRegistrar.setBounds(100, 360, 300, 45);
+        btnRegistrar.setBackground(new Color(0, 255, 200)); 
+        btnRegistrar.setForeground(Color.BLACK);
+        btnRegistrar.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnRegistrar.setFocusPainted(false);
+        btnRegistrar.setBorderPainted(false);
+        btnRegistrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnRegistrar.addActionListener(e -> {
+            boolean error = false;
+            
+            JTextField[] campos = {nombre, apellido, email};
+            for(JTextField txt : campos) {
+                if(txt.getText().trim().isEmpty()) {
+                    txt.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+                    error = true;
+                } else {
+                    txt.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 200), 1));
+                }
+            }
+
+            if(!error) {
+                JOptionPane.showMessageDialog(null, "¡Usuario " + nombre.getText() + " registrado con éxito!");
+                router("consultar"); 
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, llena todos los campos marcados en rojo.");
+            }
+        });
+        card.add(btnRegistrar);
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(200, 420, 100, 30);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setForeground(Color.GRAY);
+        btnCancelar.addActionListener(e -> router("login"));
+        card.add(btnCancelar);
+        
+        panelPrincipal.add(card);
+        this.add(panelPrincipal);
+        
+        this.repaint();
+        this.revalidate();
+    }
+
+    private JLabel crearLabelForm(String texto, int y) {
+        JLabel label = new JLabel(texto);
+        label.setBounds(100, y, 300, 25);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        label.setForeground(new Color(70, 70, 70)); 
+        return label;
+    }
+
+    private JTextField crearTextFieldForm(int y) {
+        JTextField field = new JTextField();
+        field.setBounds(100, y, 300, 35);
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        field.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(0, 10, 0, 10)
+        ));
+        return field;
     }
 
     
-    public void Baja(){
-
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(null);
-        panel.setBounds(0,0,1200,600);
-
-        JLabel titulo = new JLabel("BAJA DE USUARIO");
-        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-        titulo.setBounds(450,200,400,50);
-
-        panel.add(titulo);
-
-        this.add(panel);
-    }
-
+    
   
-    public void Consultar(){
-
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE);
-        panel.setLayout(null);
-        panel.setBounds(0,0,1200,600);
-
-        JLabel titulo = new JLabel("CONSULTAR USUARIOS");
-        titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-        titulo.setBounds(430,200,400,50);
-
-        panel.add(titulo);
-
-        this.add(panel);
-    }
     
     public void comoCrear(){
-    	
-    	JPanel panel = new JPanel();
-    	panel.setBackground(Color.WHITE);
-    	panel.setLayout(null);
-    	panel.setBounds(0,0,1200,600);
-    	
-    	JLabel titulo = new JLabel("CONSULTAR USUARIOS");
-    	titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-    	titulo.setBounds(430,200,400,50);
-    	
-    	panel.add(titulo);
-    	
-    	this.add(panel);
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(243, 244, 246));
+        panelPrincipal.setLayout(null);
+        panelPrincipal.setBounds(0, 0, 1200, 600);
+
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setLayout(null);
+        card.setBounds(350, 80, 500, 420);
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
+
+        JLabel titulo = new JLabel("¿Cómo crear un usuario?", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setBounds(0, 30, 500, 30);
+        card.add(titulo);
+
+        JTextArea pasos = new JTextArea(
+            "Sigue estos sencillos pasos para registrar a alguien:\n\n" +
+            "1. Ve al menú 'Usuarios' en la parte superior.\n" +
+            "2. Haz clic en la opción 'Dar de Alta'.\n" +
+            "3. Ingresa el nombre, apellido y correo del usuario.\n" +
+            "4. Presiona el botón verde 'DAR DE ALTA'.\n\n" +
+            "El sistema validará que no haya campos vacíos y marcará\n" +
+            "en rojo si falta información importante."
+        );
+        pasos.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        pasos.setForeground(new Color(50, 50, 50));
+        pasos.setEditable(false);
+        pasos.setOpaque(false); 
+        pasos.setBounds(50, 90, 400, 200);
+        card.add(pasos);
+
+        JButton btnEntendido = new JButton("Entendido");
+        btnEntendido.setBounds(150, 320, 200, 45);
+        btnEntendido.setBackground(new Color(0, 255, 200)); // Tu color Cian
+        btnEntendido.setForeground(Color.BLACK);
+        btnEntendido.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnEntendido.setFocusPainted(false);
+        btnEntendido.setBorderPainted(false);
+        btnEntendido.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        btnEntendido.addActionListener(e -> login()); 
+        card.add(btnEntendido);
+
+        panelPrincipal.add(card);
+        this.add(panelPrincipal);
+        
+        this.repaint();
+        this.revalidate();
+        
     }
+    
     public void comoAcceder(){
-    	
-    	JPanel panel = new JPanel();
-    	panel.setBackground(Color.WHITE);
-    	panel.setLayout(null);
-    	panel.setBounds(0,0,1200,600);
-    	
-    	JLabel titulo = new JLabel("CONSULTAR USUARIOS");
-    	titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-    	titulo.setBounds(430,200,400,50);
-    	
-    	panel.add(titulo);
-    	
-    	this.add(panel);
+    	JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(243, 244, 246));
+        panelPrincipal.setLayout(null);
+        panelPrincipal.setBounds(0, 0, 1200, 600);
+
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setLayout(null);
+        card.setBounds(350, 60, 500, 400);
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
+
+        
+        JLabel titulo = new JLabel("¿Cómo acceder al sistema?", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setBounds(0, 30, 500, 30);
+        card.add(titulo);
+
+     
+        JTextArea textoAyuda = new JTextArea(
+            "Para ingresar correctamente al sistema, sigue estas indicaciones:\n\n" +
+            "• Usuario: Ingresa tu nombre de usuario asignado.\n" +
+            "• Contraseña: Debe ser la clave que definiste al registrarte.\n\n" +
+            "Si los bordes de los campos se iluminan en ROJO, significa que\n" +
+            "los datos son incorrectos o el campo está vacío.\n\n" +
+            "Si se iluminan en VERDE, el formato es correcto y puedes entrar."
+        );
+        textoAyuda.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        textoAyuda.setEditable(false);
+        textoAyuda.setOpaque(false);
+        textoAyuda.setForeground(new Color(60, 60, 60));
+        textoAyuda.setBounds(40, 90, 500, 200);
+        card.add(textoAyuda);
+
+        JButton btnEntendido = new JButton("Entendido");
+        btnEntendido.setBounds(150, 300, 200, 45);
+        btnEntendido.setBackground(new Color(0, 255, 200)); 
+        btnEntendido.setForeground(Color.BLACK);
+        btnEntendido.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnEntendido.setFocusPainted(false);
+        btnEntendido.setBorderPainted(false);
+        btnEntendido.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       
+        btnEntendido.addActionListener(e -> router("login"));
+        card.add(btnEntendido);
+
+        panelPrincipal.add(card);
+        this.add(panelPrincipal);
+        
+        this.repaint();
+        this.revalidate();
     }
+    
+    
     public void olvideContra(){
-    	
-    	JPanel panel = new JPanel();
-    	panel.setBackground(Color.WHITE);
-    	panel.setLayout(null);
-    	panel.setBounds(0,0,1200,600);
-    	
-    	JLabel titulo = new JLabel("CONSULTAR USUARIOS");
-    	titulo.setFont(new Font("Segoe UI",Font.BOLD,30));
-    	titulo.setBounds(430,200,400,50);
-    	
-    	panel.add(titulo);
-    	
-    	this.add(panel);
+    
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setBackground(new Color(243, 244, 246));
+        panelPrincipal.setLayout(null);
+        panelPrincipal.setBounds(0, 0, 1200, 600);
+
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setLayout(null);
+        card.setBounds(350, 60, 500, 480); 
+        card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
+
+        JLabel titulo = new JLabel("¿Cómo acceder al sistema?", SwingConstants.CENTER);
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setBounds(0, 30, 500, 40);
+        card.add(titulo);
+
+        JTextArea textoAyuda = new JTextArea();
+        textoAyuda.setText(
+            "Para ingresar correctamente al sistema, sigue estas indicaciones:\n\n" +
+            "• Usuario: Ingresa tu nombre de usuario asignado (ej. Maryfer11).\n\n" +
+            "• Contraseña: Debe ser la clave que definiste al registrarte.\n\n" +
+            "Si los bordes de los campos se iluminan en ROJO, significa que los datos son " +
+            "incorrectos o el campo está vacío.\n\n" +
+            "Si se iluminan en VERDE, el formato es correcto y puedes entrar."
+        );
+        
+        textoAyuda.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textoAyuda.setForeground(new Color(70, 70, 70));
+        textoAyuda.setEditable(false);
+        textoAyuda.setOpaque(false); 
+        textoAyuda.setLineWrap(true);       
+        textoAyuda.setWrapStyleWord(true);  
+        textoAyuda.setBounds(50, 90, 400, 300);
+        card.add(textoAyuda);
+
+        JButton btnEntendido = new JButton("Entendido");
+        btnEntendido.setBounds(150, 370, 200, 45); 
+        btnEntendido.setBackground(new Color(0, 255, 200)); 
+        btnEntendido.setForeground(Color.BLACK);
+        btnEntendido.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnEntendido.setFocusPainted(false);
+        btnEntendido.setBorderPainted(false);
+        btnEntendido.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        btnEntendido.addActionListener(e -> router("login"));
+        card.add(btnEntendido);
+
+        panelPrincipal.add(card);
+        this.add(panelPrincipal);
+        
+        this.repaint();
+        this.revalidate();
     }
 
 	/*public void test() {
