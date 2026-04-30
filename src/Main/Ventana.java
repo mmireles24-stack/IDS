@@ -46,34 +46,20 @@ import javax.swing.SwingConstants;
 public class Ventana extends JFrame {
 
 	public Ventana() {
-		this.setSize(1200, 1200);// para que tenga medidas de cuando se crea
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// al cerrar ventana no se siga ejecutando el codigo
-		// this.setLocationRelativeTo(null);//ponerla en el centro
-		this.setMinimumSize(new Dimension(200, 200));// da parametros de cuanto puede crecer o minimizar
-		this.setMaximumSize(new Dimension(800, 800));
-		this.setTitle("Login");
-		this.setBackground(Color.BLACK);
-
-		Toolkit logo_windows = Toolkit.getDefaultToolkit();
-		Image icono = logo_windows.getImage("logoMJ.png");
-		this.setIconImage(icono);
 		// this.setContentPane(new JPanel() {
 
-		/*
-		 * protected void paintComponent(Graphics g) { super.paintComponent(g);
-		 * Graphics2D g2d = (Graphics2D) g;
-		 * 
-		 * Color azul = new Color(0, 153, 255); Color turquesa = new Color(0, 255, 255);
-		 * 
-		 * GradientPaint gp = new GradientPaint( 0, 0, azul, 0, getHeight(), turquesa );
-		 * 
-		 * g2d.setPaint(gp); g2d.fillRect(0, 0, getWidth(), getHeight()); }
-		 */
-		// });
-		// this.getContentPane().setBackground(Color.decode("#0B0B0F"));;
-		this.setLayout(null);// Es para tener un marco, aqui no tenemos por el null
-		this.setLocation(200, 200);
-	
+				/*
+				 * protected void paintComponent(Graphics g) { super.paintComponent(g);
+				 * Graphics2D g2d = (Graphics2D) g;
+				 * 
+				 * Color azul = new Color(0, 153, 255); Color turquesa = new Color(0, 255, 255);
+				 * 
+				 * GradientPaint gp = new GradientPaint( 0, 0, azul, 0, getHeight(), turquesa );
+				 * 
+				 * g2d.setPaint(gp); g2d.fillRect(0, 0, getWidth(), getHeight()); }
+				 */
+				// });
+				// this.getContentPane().setBackground(Color.decode("#0B0B0F"));;	
 
 
 		
@@ -571,6 +557,7 @@ public class Ventana extends JFrame {
   
     public void router(String target){
 
+
         this.getContentPane().removeAll();
         this.menu();
 
@@ -704,7 +691,7 @@ public class Ventana extends JFrame {
         JPanel card = new JPanel();
         card.setBackground(Color.WHITE);
         card.setLayout(null);
-        card.setBounds(400, 80, 400, 480); // Un poco más alto para los nuevos campos
+        card.setBounds(400, 80, 400, 480); 
         card.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
 
         JLabel titulo = new JLabel("Verificación", SwingConstants.CENTER);
@@ -780,6 +767,7 @@ public class Ventana extends JFrame {
 
    
     public void Alta() {
+
         this.getContentPane().removeAll();
         this.menu();
 
@@ -832,6 +820,7 @@ public class Ventana extends JFrame {
         btnRegistrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         btnRegistrar.addActionListener(e -> {
+
             boolean error = false;
             
             JTextField[] campos = {nombre, apellido, email};
@@ -868,6 +857,7 @@ public class Ventana extends JFrame {
     }
 
     private JLabel crearLabelForm(String texto, int y) {
+
         JLabel label = new JLabel(texto);
         label.setBounds(100, y, 300, 25);
         label.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -876,6 +866,7 @@ public class Ventana extends JFrame {
     }
 
     private JTextField crearTextFieldForm(int y) {
+
         JTextField field = new JTextField();
         field.setBounds(100, y, 300, 35);
         field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -891,6 +882,7 @@ public class Ventana extends JFrame {
   
     
     public void comoCrear(){
+
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setBackground(new Color(243, 244, 246));
         panelPrincipal.setLayout(null);
@@ -925,7 +917,7 @@ public class Ventana extends JFrame {
 
         JButton btnEntendido = new JButton("Entendido");
         btnEntendido.setBounds(150, 320, 200, 45);
-        btnEntendido.setBackground(new Color(0, 255, 200)); // Tu color Cian
+        btnEntendido.setBackground(new Color(0, 255, 200)); 
         btnEntendido.setForeground(Color.BLACK);
         btnEntendido.setFont(new Font("Segoe UI", Font.BOLD, 14));
         btnEntendido.setFocusPainted(false);
@@ -944,6 +936,7 @@ public class Ventana extends JFrame {
     }
     
     public void comoAcceder(){
+
     	JPanel panelPrincipal = new JPanel();
         panelPrincipal.setBackground(new Color(243, 244, 246));
         panelPrincipal.setLayout(null);
@@ -998,6 +991,7 @@ public class Ventana extends JFrame {
     
     
     public void olvideContra(){
+
     
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setBackground(new Color(243, 244, 246));
