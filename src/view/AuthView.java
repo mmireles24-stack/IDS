@@ -6,6 +6,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import database.ConexionDB;
 
 public class AuthView {
 
@@ -170,7 +176,7 @@ public class AuthView {
 
         JPanel register_container = new JPanel();
         register_container.setBackground(new Color(238, 242, 246));
-        register_container.setBounds(650, 30, 500, 600);
+        register_container.setBounds(650, 30, 500, 700);
         register_container.setLayout(null);
         ventana.add(register_container);
 
@@ -189,50 +195,68 @@ public class AuthView {
         username1.setBounds(100, 110, 300, 35);
         register_container.add(username1);
 
+        // NOMBRE COMPLETO
+        JLabel nombre_completo_label = new JLabel("Nombre completo:");
+        nombre_completo_label.setBounds(100, 155, 300, 25);
+        register_container.add(nombre_completo_label);
+
+        JTextField nombre_completo = new JTextField();
+        nombre_completo.setBounds(100, 180, 300, 35);
+        register_container.add(nombre_completo);
+
+        // PASSWORD
+        JLabel password_label = new JLabel("Contraseña:");
+        password_label.setBounds(100, 225, 300, 25);
+        register_container.add(password_label);
+
+        JPasswordField password = new JPasswordField();
+        password.setBounds(100, 250, 300, 35);
+        register_container.add(password);
+
         // BIO
         JLabel bio_tag = new JLabel("Biografía");
-        bio_tag.setBounds(0, 160, 500, 30);
+        bio_tag.setBounds(0, 295, 500, 30);
         bio_tag.setHorizontalAlignment(JLabel.CENTER);
         register_container.add(bio_tag);
 
         JTextArea bio = new JTextArea();
-        bio.setBounds(100, 190, 300, 70);
+        bio.setBounds(100, 325, 300, 70);
         register_container.add(bio);
 
         // PREFERENCIAS
         JLabel preferences = new JLabel("Preferencias");
-        preferences.setBounds(0, 270, 500, 30);
+        preferences.setBounds(0, 405, 500, 30);
         preferences.setHorizontalAlignment(JLabel.CENTER);
         register_container.add(preferences);
 
         JCheckBox sweet_option = new JCheckBox("Dulce");
-        sweet_option.setBounds(110, 300, 90, 25);
+        sweet_option.setBounds(110, 435, 90, 25);
         sweet_option.setOpaque(false);
         register_container.add(sweet_option);
 
         JCheckBox salty_option = new JCheckBox("Salado");
-        salty_option.setBounds(210, 300, 90, 25);
+        salty_option.setBounds(210, 435, 90, 25);
         salty_option.setOpaque(false);
         register_container.add(salty_option);
 
         JCheckBox healthy_option = new JCheckBox("Saludable");
-        healthy_option.setBounds(310, 300, 110, 25);
+        healthy_option.setBounds(310, 435, 110, 25);
         healthy_option.setOpaque(false);
         register_container.add(healthy_option);
 
         // TERMINOS
         JLabel terms_text = new JLabel("Términos");
-        terms_text.setBounds(0, 330, 500, 30);
+        terms_text.setBounds(0, 465, 500, 30);
         terms_text.setHorizontalAlignment(JLabel.CENTER);
         register_container.add(terms_text);
 
         JRadioButton accept_terms = new JRadioButton("Acepto términos");
-        accept_terms.setBounds(110, 360, 140, 25);
+        accept_terms.setBounds(110, 495, 140, 25);
         accept_terms.setOpaque(false);
         register_container.add(accept_terms);
 
         JRadioButton reject_terms = new JRadioButton("Rechazo términos");
-        reject_terms.setBounds(260, 360, 160, 25);
+        reject_terms.setBounds(260, 495, 160, 25);
         reject_terms.setOpaque(false);
         register_container.add(reject_terms);
 
@@ -242,57 +266,182 @@ public class AuthView {
 
         // COMBO
         String[] colonias = { "Camino Real", "La fuente", "Villas del encanto" };
+
         JComboBox list = new JComboBox(colonias);
-        list.setBounds(100, 395, 300, 30);
+        list.setBounds(100, 530, 300, 30);
         register_container.add(list);
 
         // BOTON CREAR
         JButton create_account = new JButton("Crear cuenta");
-        create_account.setBounds(150, 435, 200, 40);
+        create_account.setBounds(150, 575, 200, 40);
         register_container.add(create_account);
 
         create_account.addActionListener(e -> {
 
             String username1_val = username1.getText();
+            String nombre_val = nombre_completo.getText();
+            String password_val = new String(password.getPassword());
             String bio_val = bio.getText();
 
+            // VALIDACIONES
+
             if (username1_val.equals("") || username1_val.contains(" ")) {
+
                 username1.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+
+                JOptionPane.showMessageDialog(null,
+                        "Usuario inválido");
+
+                return;
+
             } else {
+
                 username1.setBorder(BorderFactory.createLineBorder(Color.green, 3));
             }
 
-            if (bio_val.equals("")) {
-                bio.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+            if (nombre_val.equals("")) {
+
+                nombre_completo.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+
+                JOptionPane.showMessageDialog(null,
+                        "Nombre requerido");
+
+                return;
+
             } else {
+
+                nombre_completo.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+            }
+
+            if (password_val.length() < 6) {
+
+                password.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+
+                JOptionPane.showMessageDialog(null,
+                        "La contraseña debe tener mínimo 6 caracteres");
+
+                return;
+
+            } else {
+
+                password.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+            }
+
+            if (bio_val.equals("")) {
+
+                bio.setBorder(BorderFactory.createLineBorder(Color.red, 3));
+
+            } else {
+
                 bio.setBorder(BorderFactory.createLineBorder(Color.green, 3));
             }
 
-            if (!sweet_option.isSelected() && !salty_option.isSelected() && !healthy_option.isSelected()) {
+            if (!sweet_option.isSelected() &&
+                !salty_option.isSelected() &&
+                !healthy_option.isSelected()) {
+
                 sweet_option.setForeground(Color.red);
                 salty_option.setForeground(Color.red);
                 healthy_option.setForeground(Color.red);
+
             } else {
+
                 sweet_option.setForeground(Color.black);
                 salty_option.setForeground(Color.black);
                 healthy_option.setForeground(Color.black);
             }
 
             if (!accept_terms.isSelected()) {
+
                 accept_terms.setForeground(Color.red);
+
+                JOptionPane.showMessageDialog(null,
+                        "Debes aceptar los términos");
+
+                return;
+
             } else {
+
                 accept_terms.setForeground(Color.black);
+            }
+
+            // CONEXION MYSQL
+
+            Connection conn = ConexionDB.getConnection();
+
+            try {
+
+                // VALIDAR SI EL USUARIO YA EXISTE
+
+                String checkQuery = "SELECT * FROM usuarios WHERE username = ?";
+
+                PreparedStatement checkStatement =
+                        conn.prepareStatement(checkQuery);
+
+                checkStatement.setString(1, username1_val);
+
+                ResultSet rs = checkStatement.executeQuery();
+
+                if (rs.next()) {
+
+                    JOptionPane.showMessageDialog(null,
+                            "El usuario ya existe");
+
+                    username1.setBorder(
+                            BorderFactory.createLineBorder(Color.red, 3));
+
+                    return;
+                }
+
+                // INSERTAR USUARIO
+
+                String sql = "INSERT INTO usuarios (username, password, nombre_completo) VALUES (?, ?, ?)";
+
+                PreparedStatement ps = conn.prepareStatement(sql);
+
+                ps.setString(1, username1_val);
+                ps.setString(2, password_val);
+                ps.setString(3, nombre_val);
+
+                int resultado = ps.executeUpdate();
+
+                if (resultado > 0) {
+
+                    JOptionPane.showMessageDialog(null,
+                            "Usuario registrado correctamente");
+
+                    username1.setText("");
+                    nombre_completo.setText("");
+                    password.setText("");
+                    bio.setText("");
+
+                    username1.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+                    nombre_completo.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+                    password.setBorder(BorderFactory.createLineBorder(Color.green, 3));
+                }
+
+                rs.close();
+                checkStatement.close();
+                ps.close();
+                conn.close();
+
+            } catch (SQLException ex) {
+
+                JOptionPane.showMessageDialog(null,
+                        "Error en la base de datos");
+
+                ex.printStackTrace();
             }
         });
 
         // BOTON CANCELAR
         JButton cancelar = new JButton("Cancelar");
-        cancelar.setBounds(150, 500, 200, 50);
+        cancelar.setBounds(150, 625, 200, 50);
         register_container.add(cancelar);
 
         cancelar.addActionListener(e -> {
             ventana.dispose();
-            loginView(new AuthController()); 
+            loginView(new AuthController());
         });
 
         ventana.setVisible(true);
