@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import controllers.UsersController;
 import controllers.HomeController;
 
 public class HomeView {
@@ -46,7 +47,18 @@ public class HomeView {
 		panel.setLayout(null);
 		panel.setSize(1000, 600);  
 		
-		ventana.add(panel);
+		JButton goToUsers = new JButton("Ir al panel de usuarios");
+		goToUsers.setBounds(100, 100, 200, 100);
+		goToUsers.addActionListener(e ->{
+			
+			UsersController uc = new UsersController();
+			uc.showUsers();
+			
+			ventana.dispose();
+			
+		});
+		ventana.add(goToUsers);
+		
 		
 		ventana.setVisible(true);
 	}

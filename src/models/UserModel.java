@@ -35,11 +35,9 @@ public class UserModel {
 			while (rs.next()) {
 				User user = new User();
 				
-				user.setId(rs.getInt("id"));
-				user.setNombre(rs.getString("nombre"));
-				user.setCorreo(rs.getString("correo"));
-				user.setTelefono(rs.getString("telefono"));
-				
+				user.setName(rs.getString("nombre"));
+				user.setEmail(rs.getString("correo"));
+				user.setPhone(rs.getString("telefono"));
 				users.add(user);
 			}
 			
@@ -76,9 +74,9 @@ public class UserModel {
 			);
 			
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, user.getNombre());
-			ps.setString(2, user.getCorreo());
-			ps.setString(3, user.getTelefono());
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getEmail());
+			ps.setString(3, user.getPhone());
 			ps.setInt(4, user.getId());
 			
 			int rowsAffected = ps.executeUpdate();
@@ -113,13 +111,13 @@ public class UserModel {
 			conn = DriverManager.getConnection(
 				"jdbc:mysql://127.0.0.1:3306/application_db",
 				"root",
-				"root"
+				""
 			);
 			
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, user.getNombre());
-			ps.setString(2, user.getCorreo());
-			ps.setString(3, user.getTelefono());
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getEmail());
+			ps.setString(3, user.getPhone());
 			
 			int rowsAffected = ps.executeUpdate();
 			
@@ -180,62 +178,3 @@ public class UserModel {
 	}
 }
 
-class User {
-
-	private int id;
-	private String nombre;
-	private String correo;
-	private String telefono;
-
-	public User() {
-	}
-
-	public User(int id, String nombre, String correo, String telefono) {
-		this.id = id;
-		this.nombre = nombre;
-		this.correo = correo;
-		this.telefono = telefono;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", nombre='" + nombre + '\'' +
-				", correo='" + correo + '\'' +
-				", telefono='" + telefono + '\'' +
-				'}';
-	}
-}
