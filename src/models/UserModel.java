@@ -23,11 +23,9 @@ public class UserModel {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			conn = DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/application_db",
-				"root",
-				"root"
-			);
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_Rald1pvk",
+				    "u_L6vTpk",
+				    "7j0Pia4oMbiR");
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
@@ -67,11 +65,10 @@ public class UserModel {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			conn = DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/application_db",
-				"root",
-				"root"
-			);
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_Rald1pvk",
+				    "u_L6vTpk",
+				    "7j0Pia4oMbiR");
+
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setString(1, user.getName());
@@ -108,11 +105,9 @@ public class UserModel {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			conn = DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/application_db",
-				"root",
-				""
-			);
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_Rald1pvk",
+				    "u_L6vTpk",
+				    "7j0Pia4oMbiR");
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setString(1, user.getName());
@@ -148,11 +143,10 @@ public class UserModel {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			conn = DriverManager.getConnection(
-				"jdbc:mysql://127.0.0.1:3306/application_db",
-				"root",
-				"root"
-			);
+			conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_Rald1pvk",
+				    "u_L6vTpk",
+				    "7j0Pia4oMbiR");
+
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, id);

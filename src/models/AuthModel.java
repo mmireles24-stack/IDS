@@ -22,11 +22,9 @@ public class AuthModel {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://127.0.0.1:3306/application_db",
-                "root",
-                ""
-            );
+            Connection conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech/freedb_Rald1pvk",
+				    "u_L6vTpk",
+				    "7j0Pia4oMbiR");
 
             PreparedStatement ps =
             conn.prepareStatement(query);
@@ -65,12 +63,9 @@ public class AuthModel {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://127.0.0.1:3306/application_db",
-                "root",
-                ""
-            );
-
+            Connection conn = DriverManager.getConnection("jdbc:mysql://sql.freedb.tech:3306/freedb_Rald1pvk",
+				    "u_L6vTpk",
+				    "7j0Pia4oMbiR");
             PreparedStatement ps =
             conn.prepareStatement(query);
 
